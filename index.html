@@ -1,0 +1,827 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Michael Sada</title>
+<meta name="description" content="Michael Sada: Materials Engineering student at San José State University. Additive manufacturing, DfAM and prototyping.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Cuneiform&display=swap">
+<style>
+/* Layout: a lapis clay-tablet hero over drafting-paper pages; every project carries an engineering title block. */
+:root{
+  --paper:#f3f4f7; --paper-2:#e7eaf1; --ink:#0d1017; --ink-2:#4b5366; --line:#cdd3df;
+  --lapis:#1d45a6; --lapis-ink:#ffffff; --lapis-soft:#dfe6f7;
+  --hero-1:#0a1c48; --hero-2:#06102a; --hero-ink:#eef1f8; --hero-ink-2:#aebbdc; --hero-glyph:#163a86;
+  --shadow:0 1px 2px rgba(10,20,50,.06),0 8px 24px rgba(10,20,50,.06);
+  --f-display:"Cinzel","Trajan Pro",Georgia,serif;
+  --f-body:"EB Garamond",Garamond,"Times New Roman",serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --f-cune:"Noto Sans Cuneiform",serif;
+  --wrap:1120px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0b0e15; --paper-2:#121826; --ink:#e8ecf4; --ink-2:#9aa4ba; --line:#263049;
+  --lapis:#86a2f2; --lapis-ink:#081330; --lapis-soft:#17244a;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0b0e15; --paper-2:#121826; --ink:#e8ecf4; --ink-2:#9aa4ba; --line:#263049;
+  --lapis:#86a2f2; --lapis-ink:#081330; --lapis-soft:#17244a;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25); color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:19px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--lapis)}
+a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--lapis);outline-offset:3px;border-radius:4px}
+img,video,canvas{max-width:100%;display:block}
+h1,h2,h3{font-family:var(--f-display);font-weight:600;line-height:1.15;text-wrap:balance;margin:0}
+p{margin:0}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-inline:clamp(16px,4vw,40px)}
+.eyebrow{font-family:var(--f-mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+.mono{font-family:var(--f-mono)}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:20px;height:58px}
+.nav .mark{font-family:var(--f-display);font-weight:700;font-size:18px;letter-spacing:.06em;color:var(--ink);text-decoration:none;white-space:nowrap}
+.nav ul{display:flex;gap:4px;list-style:none;margin:0 0 0 auto;padding:0;overflow-x:auto;scrollbar-width:none;min-width:0}
+.nav ul::-webkit-scrollbar{display:none}
+.nav a.l{font-family:var(--f-mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);text-decoration:none;padding:8px 10px;border-radius:6px;white-space:nowrap}
+.nav a.l:hover{color:var(--ink);background:var(--paper-2)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;color:var(--hero-ink);background:radial-gradient(1000px 500px at 15% -10%,#2a55b8 0%,transparent 60%),linear-gradient(160deg,var(--hero-1),var(--hero-2))}
+.hero .tablet{position:absolute;inset:0;pointer-events:none;padding:28px 0 0 2vw;-webkit-mask-image:linear-gradient(100deg,#000 0%,rgba(0,0,0,.85) 40%,rgba(0,0,0,.15) 75%,transparent 100%);mask-image:linear-gradient(100deg,#000 0%,rgba(0,0,0,.85) 40%,rgba(0,0,0,.15) 75%,transparent 100%)}
+.hero .row{font-family:var(--f-cune);font-size:30px;line-height:58px;height:58px;white-space:nowrap;overflow:hidden;letter-spacing:7px;color:var(--hero-glyph);border-bottom:1px solid rgba(0,0,0,.35);box-shadow:0 1px 0 rgba(255,255,255,.05);text-shadow:-1px -1px 0 rgba(0,0,0,.5),1px 1px 0 rgba(150,185,255,.22)}
+.hero .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:48px;align-items:center;padding-block:88px 80px}
+.hero .eyebrow{color:var(--hero-ink-2)}
+.hero h1{font-size:clamp(46px,7.5vw,92px);font-weight:600;letter-spacing:.02em;margin:18px 0 22px;color:var(--hero-ink)}
+.hero .lede{font-size:clamp(20px,2.2vw,24px);line-height:1.5;max-width:34ch;color:var(--hero-ink)}
+.hero .meta{margin-top:22px;font-family:var(--f-mono);font-size:13.5px;line-height:1.8;color:var(--hero-ink-2)}
+.btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.btn{font-family:var(--f-mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:8px;border:1px solid transparent;cursor:pointer;background:none;color:inherit}
+.btn.primary{background:var(--hero-ink);color:var(--hero-1)}
+.btn.ghost{border-color:rgba(238,241,248,.4);color:var(--hero-ink)}
+.btn.ghost:hover{background:rgba(255,255,255,.08)}
+.btn.solid{background:var(--lapis);color:var(--lapis-ink)}
+.btn.line{border-color:var(--line);color:var(--ink)}
+.btn.line:hover{background:var(--paper-2)}
+.portrait{justify-self:center;text-align:center}
+.portrait .frame{width:min(260px,62vw);aspect-ratio:1;border-radius:50%;overflow:hidden;border:1px solid rgba(238,241,248,.35);box-shadow:0 0 0 10px rgba(255,255,255,.04),0 30px 60px rgba(0,0,0,.4)}
+.portrait img{width:100%;height:100%;object-fit:cover}
+.portrait .cap{margin-top:16px;font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--hero-ink-2)}
+.dl-note{font-family:var(--f-mono);font-size:12.5px;margin-top:10px;min-height:1em}
+.hero .dl-note{color:var(--hero-ink-2)}
+
+/* sections */
+section{padding-block:88px}
+.sec-head{display:grid;gap:12px;margin-bottom:44px;max-width:62ch}
+.sec-head h2{font-size:clamp(32px,4.4vw,48px)}
+.sec-head p{color:var(--ink-2);font-size:20px}
+.alt{background:var(--paper-2)}
+
+/* approach */
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:2px solid var(--ink);counter-reset:s}
+.step{padding:22px 22px 6px 0;border-right:1px solid var(--line);min-width:0}
+.step+.step{padding-left:22px}
+.step:last-child{border-right:0}
+.step .n{font-family:var(--f-mono);font-size:12.5px;color:var(--lapis);letter-spacing:.1em}
+.step h3{font-size:24px;margin:8px 0 10px}
+.step p{color:var(--ink-2);font-size:17.5px}
+.arrow{font-family:var(--f-mono);color:var(--lapis)}
+
+/* project */
+.project{display:grid;gap:36px;padding-block:72px;border-top:1px solid var(--line)}
+.project:first-of-type{border-top:0;padding-top:0}
+.p-head{display:grid;gap:10px}
+.p-head h3{font-size:clamp(30px,3.8vw,44px)}
+.p-head .tag{display:flex;flex-wrap:wrap;gap:8px 16px;font-family:var(--f-mono);font-size:13px;color:var(--ink-2);letter-spacing:.04em}
+.p-head .tag b{color:var(--lapis);font-weight:500}
+.p-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:44px;align-items:start}
+.story{display:grid;gap:22px;min-width:0}
+.story h4{font-family:var(--f-mono);font-size:12.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--lapis);margin:0 0 6px}
+.story p{max-width:62ch}
+.story ul{margin:0;padding-left:1.1em;display:grid;gap:8px;max-width:60ch}
+.story li::marker{color:var(--lapis)}
+
+/* title block (drawing convention) */
+.tblock{border:1.5px solid var(--ink);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--ink);font-family:var(--f-mono);font-size:13px}
+.tblock div{padding:9px 12px;background:var(--paper);min-width:0}
+.tblock div.full{grid-column:1/-1}
+.tblock span{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);margin-bottom:2px}
+.tblock strong{font-weight:500;color:var(--ink);overflow-wrap:anywhere}
+
+.media{display:grid;gap:14px;min-width:0}
+figure{margin:0;min-width:0}
+figure img,figure video{width:100%;border-radius:6px;background:var(--paper-2);border:1px solid var(--line)}
+figcaption{font-family:var(--f-mono);font-size:12.5px;line-height:1.5;color:var(--ink-2);margin-top:8px}
+.zoom{cursor:zoom-in}
+.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+img.cover{aspect-ratio:4/5;object-fit:cover}
+img.sq{aspect-ratio:1;object-fit:cover}
+.vid video{max-height:640px;width:auto;max-width:100%;margin-inline:auto;background:#000}
+
+/* 3D viewer */
+.viewer{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--paper)}
+.alt .viewer{background:var(--paper)}
+.viewer .stage{position:relative;aspect-ratio:4/3;background:radial-gradient(circle at 50% 40%,var(--paper-2),var(--paper) 70%)}
+.viewer canvas{width:100%!important;height:100%!important;cursor:grab}
+.viewer .hint{position:absolute;left:12px;bottom:10px;font-family:var(--f-mono);font-size:11.5px;color:var(--ink-2);pointer-events:none}
+.viewer .fallback{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:20px;font-family:var(--f-mono);font-size:13px;color:var(--ink-2)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;padding:12px;border-top:1px solid var(--line)}
+.tabs button{font-family:var(--f-mono);font-size:12px;letter-spacing:.04em;padding:7px 10px;border-radius:6px;border:1px solid var(--line);background:transparent;color:var(--ink-2);cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--lapis);border-color:var(--lapis);color:var(--lapis-ink)}
+.partinfo{padding:4px 14px 14px;display:grid;gap:4px}
+.partinfo .pn{font-family:var(--f-display);font-size:20px;font-weight:600}
+.partinfo .pd{font-family:var(--f-mono);font-size:12.5px;color:var(--lapis)}
+.partinfo p{font-size:17px;color:var(--ink-2)}
+
+/* BOM */
+.bom{overflow-x:auto}
+.bom table{width:100%;border-collapse:collapse;font-family:var(--f-mono);font-size:12.5px;min-width:420px}
+.bom th,.bom td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.bom th{font-weight:500;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);border-bottom:1.5px solid var(--ink)}
+.bom td.q{font-variant-numeric:tabular-nums;width:3em}
+.pill{display:inline-block;white-space:nowrap;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:99px;background:var(--lapis-soft);color:var(--lapis)}
+.pill.off{background:transparent;border:1px solid var(--line);color:var(--ink-2)}
+
+.callout{border-left:3px solid var(--lapis);padding:4px 0 4px 18px;font-size:20px;font-style:italic;max-width:56ch}
+
+/* more work cards */
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;align-items:start}
+.card{display:grid;gap:16px;min-width:0}
+.card h3{font-size:26px}
+.card p{font-size:18px;color:var(--ink)}
+.card .k{font-family:var(--f-mono);font-size:12.5px;color:var(--ink-2)}
+.datatable{overflow-x:auto}
+.datatable table{width:100%;border-collapse:collapse;font-family:var(--f-mono);font-size:12.5px;font-variant-numeric:tabular-nums}
+.datatable th,.datatable td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:right}
+.datatable th:first-child,.datatable td:first-child{text-align:left}
+.datatable th{font-weight:500;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);border-bottom:1.5px solid var(--ink)}
+.datatable td.hl{color:var(--lapis);font-weight:500}
+.verdict{display:grid;gap:8px}
+.verdict div{display:flex;gap:10px;align-items:baseline;font-size:17px}
+.verdict .pill{flex:none}
+
+/* workshop */
+.shop{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:44px;align-items:start}
+.printers{list-style:none;margin:18px 0 0;padding:0;border-top:1.5px solid var(--ink)}
+.printers li{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-family:var(--f-mono);font-size:13.5px}
+.printers li span:last-child{color:var(--ink-2);text-align:right}
+.gcode{border:1px solid var(--line);border-radius:8px;padding:18px;background:var(--paper)}
+.gcode svg{width:100%;height:auto;display:block}
+.cert{display:flex;gap:16px;align-items:center;margin-top:28px;padding-top:24px;border-top:1px solid var(--line)}
+.cert .seal{flex:none;width:58px;height:58px;border-radius:50%;border:1.5px solid var(--lapis);display:grid;place-items:center;font-family:var(--f-display);font-weight:700;color:var(--lapis);font-size:14px}
+
+/* beyond */
+.beyond{position:relative;overflow:hidden;color:var(--hero-ink);background:linear-gradient(165deg,var(--hero-1),var(--hero-2))}
+.beyond .sec-head p{color:var(--hero-ink-2)}
+.beyond .eyebrow{color:var(--hero-ink-2)}
+.beyond figure img{border-color:rgba(255,255,255,.12);background:#0b1430}
+.beyond figcaption{color:var(--hero-ink-2)}
+.beyond .tblock{background:rgba(238,241,248,.32);border-color:rgba(238,241,248,.55)}
+.beyond .tblock div{background:#0a1a44}
+.beyond .tblock span{color:var(--hero-ink-2)}
+.beyond .tblock strong{color:var(--hero-ink)}
+.beyond .story h4{color:#a9bdf5}
+.beyond .story li::marker{color:#a9bdf5}
+.beyond .project{border-top-color:rgba(255,255,255,.14)}
+.beyond .p-head .tag{color:var(--hero-ink-2)}
+.beyond .p-head .tag b{color:#a9bdf5}
+.beyond .callout{border-left-color:#a9bdf5}
+.league-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.league-grid img{aspect-ratio:4/3;object-fit:cover}
+.bigstat{display:flex;gap:28px;flex-wrap:wrap;align-items:flex-end}
+.bigstat div{display:grid}
+.bigstat b{font-family:var(--f-display);font-size:48px;line-height:1;font-weight:600}
+.bigstat span{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--hero-ink-2);margin-top:6px}
+.bigstat i{font-family:var(--f-mono);font-style:normal;color:#a9bdf5;font-size:22px;padding-bottom:18px}
+
+/* about */
+.about{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:56px;align-items:start}
+.about .story p{font-size:20px}
+.facts{display:grid;gap:18px}
+.facts dl{margin:0;display:grid;gap:0;border-top:1.5px solid var(--ink)}
+.facts dl div{display:grid;grid-template-columns:9.5em minmax(0,1fr);gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.facts dt{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);padding-top:4px}
+.facts dd{margin:0;font-size:17.5px}
+
+/* contact */
+.contact{text-align:left}
+.contact .box{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:40px;align-items:center;border:1.5px solid var(--ink);border-radius:10px;padding:clamp(22px,4vw,44px)}
+.contact h2{font-size:clamp(30px,4vw,44px);margin-bottom:12px}
+.contact p{color:var(--ink-2);max-width:48ch}
+.email{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:14px}
+.email code{font-family:var(--f-mono);font-size:clamp(15px,2vw,18px);user-select:all;overflow-wrap:anywhere;color:var(--ink)}
+.copy{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:7px 11px;border-radius:6px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.c-actions{display:grid;gap:10px}
+footer{padding-block:28px 40px;font-family:var(--f-mono);font-size:12px;color:var(--ink-2)}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* lightbox */
+dialog.lb{border:0;padding:0;background:transparent;max-width:min(94vw,1100px);max-height:92vh}
+dialog.lb::backdrop{background:rgba(5,9,20,.86)}
+dialog.lb img{max-height:82vh;width:auto;max-width:100%;margin:0 auto;border-radius:6px}
+dialog.lb p{color:#dfe6f7;font-family:var(--f-mono);font-size:13px;text-align:center;margin-top:10px}
+dialog.lb button{position:absolute;top:6px;right:6px;font-family:var(--f-mono);font-size:12px;background:rgba(0,0,0,.6);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:6px;padding:6px 10px;cursor:pointer}
+
+@media (max-width:900px){
+  .hero .wrap{grid-template-columns:1fr;gap:36px;padding-block:56px 60px}
+  .portrait{justify-self:start;order:-1;text-align:left}
+  .portrait .frame{width:150px}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .step:nth-child(2){border-right:0}
+  .step:nth-child(3){padding-left:0;border-top:1px solid var(--line)}
+  .step:nth-child(4){border-top:1px solid var(--line)}
+  .p-grid,.shop,.about,.contact .box{grid-template-columns:1fr}
+  .cards{grid-template-columns:1fr;gap:56px}
+  section{padding-block:64px}
+}
+@media (max-width:560px){
+  body{font-size:18px}
+  .steps{grid-template-columns:1fr}
+  .step,.step+.step{padding:18px 0 8px;border-right:0;border-top:1px solid var(--line)}
+  .step:first-child{border-top:0}
+  .trio{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .league-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tblock{grid-template-columns:1fr}
+  .facts dl div{grid-template-columns:1fr;gap:2px}
+  .nav .wrap{gap:10px}
+  .bigstat{gap:12px 14px}
+  .bigstat b{font-size:36px}
+  .bigstat span{max-width:7.5em}
+  .bigstat i{padding-bottom:24px;font-size:18px}
+}
+p.eyebrow.eyebrow{font-size:12.5px;line-height:1.5}
+.beyond p.eyebrow.eyebrow{color:var(--hero-ink-2)}
+body{margin:0}
+</style>
+</head>
+<body>
+
+
+<nav class="nav" aria-label="Sections">
+  <div class="wrap">
+    <a class="mark" href="#top">M. Sada</a>
+    <ul>
+      <li><a class="l" href="#work">Work</a></li>
+      <li><a class="l" href="#workshop">Workshop</a></li>
+      <li><a class="l" href="#beyond">Beyond</a></li>
+      <li><a class="l" href="#about">About</a></li>
+      <li><a class="l" href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="tablet" id="tablet" aria-hidden="true"></div>
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Materials Engineering · San José State University</p>
+      <h1>Michael Sada</h1>
+      <p class="lede">I take parts from idea to working prototype. I design for the process, choose the material for the application, and pick the additive manufacturing process that fits both.</p>
+      <p class="meta">B.S. Materials Engineering, expected May 2028<br>Looking for Summer 2027 internships in the Bay Area</p>
+      <div class="btns">
+        <a class="btn primary" href="#work">See my work</a>
+        <a class="btn ghost" href="Michael_Sada_Resume.pdf" download>Download resume</a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/michael-sada-b30611254" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+    </div>
+    <div class="portrait">
+      <div class="frame"><img src="media/me.jpg" alt="Portrait of Michael Sada" width="309" height="296"></div>
+      <p class="cap">San Jose, California</p>
+    </div>
+  </div>
+</header>
+
+<main>
+<section id="approach">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">How I work</p>
+      <h2>Part <span class="arrow">→</span> Material <span class="arrow">→</span> Process <span class="arrow">→</span> Prototype</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><p class="n">STEP 1</p><h3>Part</h3><p>Define what it has to do: the loads, the fit, and the off-the-shelf hardware it has to work with.</p></div>
+      <div class="step"><p class="n">STEP 2</p><h3>Material</h3><p>Choose for the job. Rigid PLA for structure, flexible TPU where a part has to grip or cushion.</p></div>
+      <div class="step"><p class="n">STEP 3</p><h3>Process</h3><p>Pick the process and print settings, and design for them from the first sketch, tolerances included.</p></div>
+      <div class="step"><p class="n">STEP 4</p><h3>Prototype</h3><p>Print, measure, adjust. Iterate until the fit is right, then document it.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="work" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Selected work</p>
+      <h2>Projects</h2>
+      <p>Three projects that show how I design for additive manufacturing, from a client prototype to a small business.</p>
+    </div>
+
+    <!-- SOLAR -->
+    <article class="project" id="solar">
+      <div class="p-head">
+        <p class="eyebrow">Lead designer · 2024 · Modesto Junior College</p>
+        <h3>Autonomous Solar Tracker</h3>
+      </div>
+      <div class="tblock">
+        <div><span>Role</span><strong>Lead designer</strong></div>
+        <div><span>Printed parts</span><strong>8 (PLA + TPU)</strong></div>
+        <div><span>Hardware</span><strong>1/4-20 &amp; M2 fasteners, bearings</strong></div>
+        <div><span>Electronics</span><strong>Arduino Uno, servo, solar cell</strong></div>
+        <div class="full"><span>Result</span><strong>Every printed part fit on the first print</strong></div>
+      </div>
+      <div class="p-grid">
+        <div class="story">
+          <div>
+            <h4>What it does</h4>
+            <p>An Arduino Uno rotates the panel's mast a full 360° through a servo and timing belt, records the solar cell's output along the way, and returns to the angle that produced the most power. The panel's tilt is set by hand at a pivot and locked in place.</p>
+          </div>
+          <div>
+            <h4>My rules</h4>
+            <ul>
+              <li>Use specific off-the-shelf fasteners and bearings, with no glue anywhere.</li>
+              <li>Use as few parts as possible.</li>
+              <li>Everything comes fully apart and goes back together.</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Design details</h4>
+            <ul>
+              <li><b>Locking pivot.</b> The panel tilts on a 1/4-20 bolt with a hex nut captured in the print, so it can't spin loose once tightened.</li>
+              <li><b>Adjustable belt tension.</b> The servo seat is slotted, so sliding the servo back pulls the timing belt tight against the mast.</li>
+              <li><b>Glue-free pulley.</b> A conical TPU press-fit bushing grips the pulley to the mast.</li>
+              <li><b>Bearing housings.</b> Two printed housings, Ø32 × 40 mm with a 22 mm bore, seat the ball bearings the mast spins in.</li>
+              <li>Mounting holes for the Arduino, solar cell, servo and battery pack are designed into the prints.</li>
+            </ul>
+          </div>
+          <div>
+            <h4>One evening, eight parts</h4>
+            <p>The first round of parts didn't fit the hardware we had chosen. Instead of patching them, I restarted from scratch one Friday evening and designed all eight printed parts in about eight hours. Because I built FDM tolerances into the CAD from the start, every part fit on the first print.</p>
+          </div>
+        </div>
+        <div class="media">
+          <figure class="vid">
+            <video src="media/solar-demo.mp4" poster="media/solar-demo-poster.jpg" controls playsinline preload="metadata"></video>
+            <figcaption>Live demo, presenting the tracker. A flashlight stands in for the sun.</figcaption>
+          </figure>
+          <div class="duo">
+            <figure><img class="zoom cover" src="media/solar-built.jpg" alt="The assembled solar tracker: yellow printed base and mast, blue bearing housing and pulley, Arduino and battery pack" loading="lazy"><figcaption>The finished build.</figcaption></figure>
+            <figure><img class="zoom cover" src="media/solar-drawing.jpg" alt="Assembly drawing with section view and parts list" loading="lazy" style="object-fit:contain;background:#fff"><figcaption>Assembly drawing with section A-A.</figcaption></figure>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-grid">
+        <div class="viewer" id="viewer">
+          <div class="stage" id="stage">
+            <div class="fallback" id="vfallback">Loading 3D model…</div>
+            <p class="hint">Drag to rotate · scroll or pinch to zoom</p>
+          </div>
+          <div class="tabs" role="tablist" aria-label="Printed parts" id="tabs"></div>
+          <div class="partinfo" aria-live="polite"><p class="pn" id="pn"></p><p class="pd" id="pd"></p><p id="pp"></p></div>
+        </div>
+        <div class="story">
+          <div>
+            <h4>Bill of materials</h4>
+            <p style="font-size:17.5px;color:var(--ink-2)">From the assembly drawing. Printed parts are my designs. Bought parts are off the shelf.</p>
+          </div>
+          <div class="bom">
+            <table>
+              <thead><tr><th>Part</th><th>Qty</th><th>Source</th></tr></thead>
+              <tbody>
+                <tr><td>Base plate</td><td class="q">1</td><td><span class="pill">Printed</span></td></tr>
+                <tr><td>Bearing housing</td><td class="q">2</td><td><span class="pill">Printed</span></td></tr>
+                <tr><td>Solar panel mount</td><td class="q">1</td><td><span class="pill">Printed</span></td></tr>
+                <tr><td>Mast coupler</td><td class="q">1</td><td><span class="pill">Printed</span></td></tr>
+                <tr><td>Timing pulley</td><td class="q">2</td><td><span class="pill">Printed</span></td></tr>
+                <tr><td>Press-fit bushing (TPU)</td><td class="q">1</td><td><span class="pill">Printed</span></td></tr>
+                <tr><td>1/4-20 UNC hex bolt + nut</td><td class="q">1</td><td><span class="pill off">Bought</span></td></tr>
+                <tr><td>M2 × 8 bolt + M2 nut</td><td class="q">1</td><td><span class="pill off">Bought</span></td></tr>
+                <tr><td>Ball bearing</td><td class="q">2</td><td><span class="pill off">Bought</span></td></tr>
+                <tr><td>Shaft, belt, standoffs (4)</td><td class="q">—</td><td><span class="pill off">Bought</span></td></tr>
+                <tr><td>Servo, Arduino Uno, battery pack, solar cell</td><td class="q">—</td><td><span class="pill off">Bought</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- KEY FINDER -->
+    <article class="project" id="keyfinder">
+      <div class="p-head">
+        <p class="eyebrow">Client capstone · 2026 · Modesto Junior College</p>
+        <h3>RF Key Finder Enclosure</h3>
+      </div>
+      <div class="tblock">
+        <div><span>Client</span><strong>Custom RF key finder</strong></div>
+        <div><span>CAD</span><strong>Onshape</strong></div>
+        <div><span>Prototype</span><strong>FDM 3D printing</strong></div>
+        <div><span>Production intent</span><strong>Injection-molded ABS</strong></div>
+        <div><span>Iterations</span><strong>9+</strong></div>
+        <div><span>Lid rim</span><strong>0.5 mm</strong></div>
+      </div>
+      <div class="p-grid">
+        <div class="story">
+          <div>
+            <h4>The brief</h4>
+            <p>A client needed a slim enclosure for their RF key finder's circuit board and battery. It mounts flush to the back of a phone case and hides under a pop socket. My printed prototype let the client test the fit and feel before investing in injection-mold tooling for ABS.</p>
+          </div>
+          <div>
+            <h4>Designing without the hardware</h4>
+            <p>I never had the circuit board in hand. I worked from photos instead, using the battery as a reference of known size to scale the board and derive every dimension.</p>
+          </div>
+          <div>
+            <h4>Nine-plus iterations</h4>
+            <p>Most iterations tightened the internal fit to remove play. The hardest detail was the lid. Its rim sits inside the body, so it had to be thin enough to sit flush yet thick enough to hold its position without deflecting. That landed at 0.5 mm.</p>
+          </div>
+          <p class="callout">The client accepted the final design and paid for the work.</p>
+        </div>
+        <div class="media">
+          <div class="duo">
+            <figure><img class="zoom cover" src="media/kf-phone.jpg" alt="The green enclosure mounted on the back of a phone under a pop socket, and held in hand" loading="lazy"><figcaption>On the phone, under the pop socket.</figcaption></figure>
+            <figure><img class="zoom cover" src="media/kf-lineup.jpg" alt="Row of green printed enclosure iterations and lids" loading="lazy"><figcaption>Iterations of the final design.</figcaption></figure>
+          </div>
+          <figure><img class="zoom" src="media/kf-oval.jpg" alt="Earlier oval enclosure prints, the CAD model, and the client's circuit board" loading="lazy"><figcaption>An earlier oval version: prints, CAD model and the client's board.</figcaption></figure>
+        </div>
+      </div>
+    </article>
+
+    <!-- NAME PRINTS -->
+    <article class="project" id="names">
+      <div class="p-head">
+        <p class="eyebrow">Small business · 2021 – 2023</p>
+        <h3>Custom Assyrian Name Prints</h3>
+      </div>
+      <div class="tblock">
+        <div><span>Sold</span><strong>About 100 custom pieces</strong></div>
+        <div><span>Customers</span><strong>Mostly repeat</strong></div>
+        <div><span>Process</span><strong>FDM, sliced in Cura</strong></div>
+        <div><span>Script</span><strong>Assyrian</strong></div>
+      </div>
+      <div class="p-grid">
+        <div class="story">
+          <div>
+            <h4>A product that didn't exist</h4>
+            <p>Search for "Michael" desk art and you'll find endless options in English. In Assyrian, there was nothing like it. So I started making custom 3D-printed names in our script, and sold about 100 pieces, mostly to repeat customers.</p>
+          </div>
+          <div>
+            <h4>Design problems the script created</h4>
+            <ul>
+              <li><b>Standing flat.</b> Some letters drop below the writing line, and some consonants carry a dot underneath. Either one keeps a piece from sitting level, so I designed balance feet that carry the name at the right height.</li>
+              <li><b>One solid piece.</b> Assyrian is a connected script, but a few letters never join the next one. After converting each name to an extrusion, I bridged those gaps by hand so every name prints as a single part.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="media">
+          <div class="duo">
+            <figure><img class="zoom sq" src="media/name-2.jpg" alt="Silver printed Assyrian name standing on printed balance feet" loading="lazy"><figcaption>Balance feet under the letters that drop below the line.</figcaption></figure>
+            <figure><img class="zoom sq" src="media/name-1.jpg" alt="White printed Assyrian name on a base rail" loading="lazy"><figcaption>A white name on a printed base.</figcaption></figure>
+            <figure><img class="zoom sq" src="media/name-3.jpg" alt="Short white printed Assyrian name with a support post" loading="lazy"><figcaption>A short name on a support post and foot.</figcaption></figure>
+            <figure><img class="zoom sq" src="media/name-4.jpg" alt="Two white heart plant picks with Assyrian names in a succulent pot" loading="lazy"><figcaption>Heart plant picks with Assyrian names.</figcaption></figure>
+          </div>
+          <figure style="max-width:52%"><img class="zoom sq" src="media/heart-tm.jpg" alt="Pink printed heart charm with the letters T and M" loading="lazy"><figcaption>Other custom work: a personalized heart charm.</figcaption></figure>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="more">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">More work</p>
+      <h2>Smaller projects and experiments</h2>
+    </div>
+    <div class="cards">
+      <article class="card" id="guitar">
+        <figure><img class="zoom cover" src="media/guitar.jpg" alt="Guitar headstock resting on a white printed hanger with blue TPU inserts" loading="lazy"><figcaption>Blue TPU inserts on a white PLA frame.</figcaption></figure>
+        <p class="k">2026 · PLA + TPU · press fit</p>
+        <h3>Guitar Hanger</h3>
+        <p>A wall-mounted hanger with a rigid PLA frame and press-fit TPU inserts that protect the guitar's finish.</p>
+        <p>I sized the press fit using worst-case tolerances, assuming both the TPU and the PLA print larger than modeled, and dialed it in over three test prints. Then I compared infill patterns and chose 5% 3D honeycomb, which compresses evenly under the downward load of the headstock.</p>
+      </article>
+
+      <article class="card" id="bottle">
+        <div class="duo">
+          <figure><img class="zoom cover" src="media/bottle-a.jpg" alt="Firm water bottle, labeled A" loading="lazy"></figure>
+          <figure><img class="zoom cover" src="media/bottle-b.jpg" alt="Deformed water bottle, labeled B" loading="lazy"></figure>
+        </div>
+        <p class="k">Experiment · mass analysis</p>
+        <h3>Water Bottle Lab</h3>
+        <p>Newer bottles from one brand were going limp. My hypothesis: the maker had thinned the walls to save plastic. I took apart a firm bottle (A) and a limp one (B), weighed every component, and ran the same test on a rigid and a brittle corn-based cup.</p>
+        <div class="datatable">
+          <table>
+            <thead><tr><th>Measure</th><th>A</th><th>B</th></tr></thead>
+            <tbody>
+              <tr><td>Bottle body</td><td>7 g</td><td>11 g</td></tr>
+              <tr><td>Water held</td><td>512 mL</td><td>441 mL</td></tr>
+              <tr><td>Plastic per mL</td><td>0.0137 g</td><td class="hl">0.0249 g</td></tr>
+              <tr><td>Cup</td><td>10.08 g</td><td class="hl">7.41 g</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="verdict">
+          <div><span class="pill off">Rejected</span><span>The limp bottle used about 58% more plastic per mL, not less.</span></div>
+          <div><span class="pill">Supported</span><span>The brittle cup was about 30% lighter, consistent with a thinner wall.</span></div>
+        </div>
+        <p>The bottles' failure points to something else: a different blow-molding design, uneven wall distribution, a different resin, or a defect. I also flagged my own error source. Body mass was only measured to the nearest gram.</p>
+      </article>
+
+      <article class="card" id="launcher">
+        <figure class="vid"><video src="media/launcher-demo.mp4" poster="media/launcher-demo-poster.jpg" controls playsinline muted loop preload="metadata"></video><figcaption>Firing at the target.</figcaption></figure>
+        <p class="k">First class project · surgical tubing · CNC-cut PVC</p>
+        <h3>Ball Launcher</h3>
+        <p>A ball cannon powered by surgical tubing, built to hit a target within a set range. It was my first class project after getting into 3D printing.</p>
+        <p>The further you pull the ball holder back, the more power it has. A trigger locks the holder into a slot at that setting until you trip it. The barrel's channels were CNC-cut from PVC pipe. Aimed by sight, it had a range of about 30 feet.</p>
+        <figure><img class="zoom" src="media/launcher.jpg" alt="Ball launcher: PVC barrel with notched slot, printed gray yoke and blue clamps, surgical tubing" loading="lazy" style="aspect-ratio:3/4;object-fit:cover"><figcaption>The CNC-cut PVC barrel, with the slots for each power setting.</figcaption></figure>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="workshop" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Workshop</p>
+      <h2>I know the machines, not just the slicer</h2>
+    </div>
+    <div class="shop">
+      <div class="story">
+        <div>
+          <h4>Five printers, built from kits</h4>
+          <p>For the Innovation Center at Modesto Junior College, I built five 3D printers from kits over three years, with no preassembled parts. Each took about a week. The Prusa XL and its toolchanger were by far the hardest to build and to keep running, and taught me the most.</p>
+          <ul class="printers">
+            <li><span>Prusa XL</span><span>toolchanger</span></li>
+            <li><span>Prusa MK4</span><span>bed slinger</span></li>
+            <li><span>Prusa MK3</span><span>bed slinger</span></li>
+            <li><span>Creality CR-10 V2</span><span>bed slinger</span></li>
+            <li><span>Bambu Lab</span><span>bed slinger</span></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Hot-end swaps</h4>
+          <p>I swapped the hot end on my CR-10 V2 many times and wrote my own step-by-step procedure for doing it.</p>
+        </div>
+        <div class="cert">
+          <div class="seal">SME</div>
+          <div><p style="font-size:19px"><b>Certified Additive Manufacturing Fundamentals (CAMF)</b></p><p class="mono" style="font-size:13px;color:var(--ink-2)">Society of Manufacturing Engineers · May 2026</p></div>
+        </div>
+      </div>
+      <div class="story">
+        <div>
+          <h4>Bed leveling I wrote by hand</h4>
+          <p>Before I had auto-leveling, I taught myself G-code and wrote a calibration routine that my slicer ran before every print. The nozzle traces the bed's perimeter while extruding, so I could turn each leveling knob and watch the line change in real time. Then it repeats in a smaller square, about five times, until the bed is level.</p>
+        </div>
+        <div class="gcode">
+          <svg viewBox="0 0 360 300" role="img" aria-labelledby="gct">
+            <title id="gct">Diagram of the calibration path: five nested squares traced by the nozzle, with leveling knobs at the four corners</title>
+            <rect x="20" y="20" width="320" height="260" rx="8" fill="none" stroke="var(--line)" stroke-width="1.5"/>
+            <g fill="none" stroke="var(--lapis)" stroke-linejoin="round">
+              <path d="M44 44 H316 V256 H44 Z" stroke-width="2.4"/>
+              <path d="M72 70 H288 V230 H72 Z" stroke-width="2" opacity=".85"/>
+              <path d="M100 96 H260 V204 H100 Z" stroke-width="1.8" opacity=".7"/>
+              <path d="M128 122 H232 V178 H128 Z" stroke-width="1.6" opacity=".55"/>
+              <path d="M154 144 H206 V156 H154 Z" stroke-width="1.4" opacity=".4"/>
+            </g>
+            <g fill="var(--lapis)"><path d="M174 38 L186 44 L174 50 Z"/><path d="M310 144 L316 156 L322 144 Z"/><path d="M186 250 L174 256 L186 262 Z"/><path d="M38 156 L44 144 L50 156 Z"/></g>
+            <g fill="var(--paper)" stroke="var(--ink)" stroke-width="1.5"><circle cx="44" cy="44" r="9"/><circle cx="316" cy="44" r="9"/><circle cx="316" cy="256" r="9"/><circle cx="44" cy="256" r="9"/></g>
+            <g font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--ink-2)">
+              <text x="180" y="62" text-anchor="middle">+X</text><text x="310" y="154" text-anchor="end">+Y</text><text x="180" y="248" text-anchor="middle">−X</text><text x="52" y="154">−Y</text>
+              <text x="180" y="152" text-anchor="middle" font-size="10">5</text>
+            </g>
+          </svg>
+          <p class="mono" style="font-size:12.5px;color:var(--ink-2);margin-top:10px">Circles mark the leveling knobs. The nozzle moves along one axis at a time, extruding, while I adjust.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="beyond" class="beyond">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Beyond engineering</p>
+      <h2>Community and heritage</h2>
+      <p>Outside the lab, most of my time goes into the Assyrian community: building programs that bring people together and keep our traditions alive.</p>
+    </div>
+
+    <article class="project" id="league">
+      <div class="p-head">
+        <p class="eyebrow">Founder &amp; Sports Chairman · CCASYA</p>
+        <h3>Assyrian Indoor Soccer League</h3>
+      </div>
+      <div class="p-grid">
+        <div class="story">
+          <div class="bigstat">
+            <div><b>0</b><span>Before</span></div><i>→</i>
+            <div><b>~72</b><span>First season</span></div><i>→</i>
+            <div><b>130+</b><span>Registered players</span></div>
+          </div>
+          <p>As Sports Chairman for the Central California Assyrian Student and Youth Association, I built a nonprofit indoor soccer league from scratch in the Central Valley. The goal was to bring Assyrians from different backgrounds together through a shared love of soccer, and it worked.</p>
+          <ul>
+            <li>Built the registration system and spreadsheets that tracked each player's availability and position, then used that data to form teams and a captain structure.</li>
+            <li>Compared indoor facilities on availability, field quality and price, and negotiated rates and schedules that kept the league within budget.</li>
+            <li>Ran weekly operations: bookings, game schedules, and communication with captains and players.</li>
+            <li>Presented the league's organizational playbook at the 75th Annual National Assyrian Convention.</li>
+          </ul>
+        </div>
+        <div class="league-grid">
+          <img class="zoom" src="media/league-1.jpg" alt="League team in red jerseys" loading="lazy">
+          <img class="zoom" src="media/league-2.jpg" alt="League team in orange jerseys" loading="lazy">
+          <img class="zoom" src="media/league-3.jpg" alt="League team in white jerseys" loading="lazy">
+          <img class="zoom" src="media/league-4.jpg" alt="League team in pink jerseys" loading="lazy">
+          <img class="zoom" src="media/league-5.jpg" alt="League team in gray jerseys" loading="lazy">
+          <img class="zoom" src="media/league-6.jpg" alt="League team in light blue jerseys" loading="lazy">
+        </div>
+      </div>
+    </article>
+
+    <article class="project" id="camp">
+      <div class="p-head">
+        <p class="eyebrow">Camp leader · CCASYA</p>
+        <h3>Assyrian Kids Camp</h3>
+      </div>
+      <div class="p-grid">
+        <div class="story">
+          <p>One of four leaders of a three-day overnight camp for 13 children, ages 8 to 17. The goal was to connect kids to their Assyrian heritage and to each other. My job was less about running a schedule and more about teaching, asking questions, and following the kids' curiosity.</p>
+          <ul>
+            <li>Taught the Assyrian alphabet and how to write their names, history through photographs, traditional chants, and khigga dancing.</li>
+            <li>Led hikes, a group challenge course, archery, fishing and swimming, and kept everyone safe throughout.</li>
+            <li>Built team activities across ages, like finding what every team shared: "we all like dolma," "we all dance khigga."</li>
+          </ul>
+          <p class="callout">Parents still ask whether the camp will run again.</p>
+        </div>
+        <figure><img class="zoom" src="media/camp.jpg" alt="Campers holding posters they wrote in Assyrian, next to a CCASYA banner" loading="lazy"><figcaption>Campers with the posters they wrote in Assyrian.</figcaption></figure>
+      </div>
+    </article>
+
+    <article class="project" id="dance">
+      <div class="p-head">
+        <p class="eyebrow">Dancer &amp; group leader · since 2014</p>
+        <h3>Hakkari Dance Group</h3>
+      </div>
+      <div class="p-grid">
+        <div class="story">
+          <p>I've performed and led traditional Assyrian folk dance with the Hakkari Dance Group of the Assyrian Church of the East since 2014. Year after year, we keep our folkloric dress and dances alive, and give the older generation hope that our traditions won't be lost in America's melting pot.</p>
+          <div class="tblock">
+            <div><span>Salamanca, Spain</span><strong>2023</strong></div>
+            <div><span>Selected by</span><strong>Assyrian Arts Institute</strong></div>
+            <div><span>Dancers chosen</span><strong>3</strong></div>
+            <div><span>Audience</span><strong>About 300</strong></div>
+            <div><span>Program</span><strong>5 dances, 2 hours</strong></div>
+            <div><span>Live musicians</span><strong>12</strong></div>
+          </div>
+          <p>In 2023, I was one of three dancers the Assyrian Arts Institute selected to perform in Salamanca at an arts program held alongside a research symposium on Assyrian studies, accompanied by twelve Middle Eastern musicians, including the oud player Omar Bashir.</p>
+        </div>
+        <figure><img class="zoom" src="media/dance.jpg" alt="Michael from behind in traditional Assyrian dress with a feathered hat, facing a crowd" loading="lazy" style="max-height:620px;object-fit:cover"><figcaption>Performing in traditional Assyrian dress.</figcaption></figure>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about">
+    <div class="story">
+      <p class="eyebrow">About</p>
+      <h2 style="font-size:clamp(32px,4.4vw,48px)">From quarantine CAD to biomaterials</h2>
+      <p>I learned 3D modeling during quarantine because I was bored. With money from a new job at Jamba Juice, I bought a computer and started designing out of curiosity. Soon I wanted my models to exist in real life, so I bought a 3D printer. I haven't stopped since.</p>
+      <p>Now I'm studying Materials Engineering at San José State, focused on biomedical materials. I'm especially interested in biocompatible polymers, and in tissue and organ printing, where materials engineering and additive manufacturing meet.</p>
+      <p>Before SJSU, I spent three years as a peer tutor at Modesto Junior College, covering math through Calculus IV, physics, chemistry, properties of materials, and engineering graphics.</p>
+    </div>
+    <div class="facts">
+      <dl>
+        <div><dt>Now</dt><dd>B.S. Materials Engineering, San José State University · Aug 2026 – May 2028 (expected)</dd></div>
+        <div><dt>Before</dt><dd>A.S. for Transfer degrees in Mathematics, Physics and Engineering, Modesto Junior College · 2022 – 2026</dd></div>
+        <div><dt>Certification</dt><dd>Certified Additive Manufacturing Fundamentals (CAMF), SME</dd></div>
+        <div><dt>CAD</dt><dd>Onshape, Autodesk Inventor, Fusion 360, AutoCAD</dd></div>
+        <div><dt>Printing</dt><dd>FDM, PLA &amp; TPU, Cura, G-code, calibration, printer builds and repair</dd></div>
+        <div><dt>Shop &amp; lab</dt><dd>Manual milling and turning, arc and gas welding, metrology to ±0.001", hardness and tensile testing</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact alt">
+  <div class="wrap">
+    <div class="box">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <h2>Let's talk</h2>
+        <p>I'm looking for Summer 2027 internships, or sooner, in the Bay Area: materials engineering, additive manufacturing and prototyping, or R&amp;D lab roles.</p>
+      </div>
+      <div class="c-actions">
+        <div class="email"><code id="email">michaelsada45@gmail.com</code><button class="copy" type="button" id="copy">Copy</button></div>
+        <a class="btn solid" href="Michael_Sada_Resume.pdf" download>Download resume (PDF)</a>
+        <a class="btn line" href="https://www.linkedin.com/in/michael-sada-b30611254" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><span>© 2026 Michael Sada</span><span>San Jose, California</span></div></footer>
+
+<dialog class="lb" id="lb"><button type="button" id="lbclose">Close</button><img id="lbimg" alt=""><p id="lbcap"></p></dialog>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+// cuneiform tablet rows (decorative)
+(function(){
+  var t=document.getElementById('tablet'); if(!t) return;
+  var s=11; function r(){ s=(s*16807)%2147483647; return s/2147483647; }
+  for(var i=0;i<12;i++){ var line=''; for(var j=0;j<46;j++){ line+= r()<.15?'  ':String.fromCodePoint(0x12000+Math.floor(r()*0x36e)); }
+    var d=document.createElement('div'); d.className='row'; d.textContent=line; t.appendChild(d); }
+})();
+
+// copy email
+(function(){
+  var b=document.getElementById('copy'), e=document.getElementById('email');
+  b.addEventListener('click',function(){
+    var txt=e.textContent;
+    function sel(){ var r=document.createRange(); r.selectNodeContents(e); var s=getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent='Selected'; }
+    try{ navigator.clipboard.writeText(txt).then(function(){ b.textContent='Copied'; setTimeout(function(){b.textContent='Copy'},1800); },sel); }catch(err){ sel(); }
+  });
+})();
+
+// lightbox
+(function(){
+  var lb=document.getElementById('lb'), im=document.getElementById('lbimg'), cap=document.getElementById('lbcap');
+  document.querySelectorAll('img.zoom').forEach(function(img){
+    img.tabIndex=0;
+    function open(){ im.src=img.currentSrc||img.src; im.alt=img.alt; var fc=img.closest('figure'); cap.textContent=(fc&&fc.querySelector('figcaption'))?fc.querySelector('figcaption').textContent:img.alt; if(lb.showModal) lb.showModal(); }
+    img.addEventListener('click',open);
+    img.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(); } });
+  });
+  document.getElementById('lbclose').addEventListener('click',function(){ lb.close(); });
+  lb.addEventListener('click',function(e){ if(e.target===lb) lb.close(); });
+})();
+
+// 3D viewer
+(function(){
+  var parts=[
+    {id:'base-plate',name:'Base plate',dim:'200 × 155 × 30 mm · PLA · qty 1',color:0xf0c419,txt:'Holds the Arduino on standoffs, the battery pack, and the slotted servo seat that slides to tension the belt.'},
+    {id:'bearing-housing',name:'Bearing housing',dim:'Ø32 × 40 mm, 22 mm bore · PLA · qty 2',color:0x2b5fd9,txt:'Seats a ball bearing so the mast spins freely. Two of these carry the mast.'},
+    {id:'timing-pulley',name:'Timing pulley',dim:'Ø28 × 15 mm · PLA · qty 2',color:0x2b5fd9,txt:'One on the servo, one on the mast, linked by the timing belt.'},
+    {id:'tpu-bushing',name:'Press-fit bushing',dim:'≈ 11 mm · TPU · qty 1',color:0x3a4150,txt:'A conical TPU bushing that grips the pulley to the mast without glue.'},
+    {id:'mast-coupler',name:'Mast coupler',dim:'70 × 21 × 21 mm · PLA · qty 1',color:0xf0c419,txt:'Joins the mast to the panel. The pivot runs on a 1/4-20 bolt with a captured hex nut that locks the tilt.'},
+    {id:'panel-mount',name:'Solar panel mount',dim:'84 × 84 × 30 mm · PLA · qty 1',color:0xf0c419,txt:'Holds the solar cell with M2 hardware and forms the other half of the pivot.'}
+  ];
+  var stage=document.getElementById('stage'), fb=document.getElementById('vfallback'), tabs=document.getElementById('tabs');
+  var pn=document.getElementById('pn'), pd=document.getElementById('pd'), pp=document.getElementById('pp');
+  var load=null;
+  function select(i){
+    [].forEach.call(tabs.children,function(b,j){ b.setAttribute('aria-selected',j===i?'true':'false'); });
+    pn.textContent=parts[i].name; pd.textContent=parts[i].dim; pp.textContent=parts[i].txt;
+    if(load) load(i);
+  }
+  parts.forEach(function(p,i){ var b=document.createElement('button'); b.type='button'; b.setAttribute('role','tab'); b.textContent=p.name; b.addEventListener('click',function(){ select(i); }); tabs.appendChild(b); });
+  if(!window.THREE || !THREE.STLLoader || !THREE.OrbitControls){ fb.textContent='The 3D viewer couldn’t load here. The photos and drawing above show the parts.'; select(0); return; }
+  var renderer;
+  try{ renderer=new THREE.WebGLRenderer({antialias:true,alpha:true}); }catch(e){ fb.textContent='The 3D view needs WebGL, which this browser has turned off.'; select(0); return; }
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+  stage.insertBefore(renderer.domElement, stage.firstChild);
+  var scene=new THREE.Scene();
+  var cam=new THREE.PerspectiveCamera(35,4/3,0.1,5000);
+  scene.add(new THREE.HemisphereLight(0xffffff,0x334466,0.85));
+  var d1=new THREE.DirectionalLight(0xffffff,0.75); d1.position.set(1,1.4,1.2); scene.add(d1);
+  var d2=new THREE.DirectionalLight(0xaabbff,0.35); d2.position.set(-1.2,0.4,-1); scene.add(d2);
+  var controls=new THREE.OrbitControls(cam,renderer.domElement); controls.enableDamping=true; controls.autoRotate=!matchMedia('(prefers-reduced-motion: reduce)').matches; controls.autoRotateSpeed=1.6; controls.enablePan=false;
+  var loader=new THREE.STLLoader(), cache={}, current=null, want=0;
+  function size(){ var w=stage.clientWidth, h=stage.clientHeight; if(!w||!h) return; renderer.setSize(w,h,false); cam.aspect=w/h; cam.updateProjectionMatrix(); }
+  size(); if(window.ResizeObserver) new ResizeObserver(size).observe(stage);
+  function put(i,geo){
+    if(i!==want) return;
+    if(current){ scene.remove(current); }
+    var m=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({color:parts[i].color,roughness:0.55,metalness:0.05}));
+    geo.computeBoundingBox(); var c=new THREE.Vector3(); geo.boundingBox.getCenter(c); m.position.copy(c).multiplyScalar(-1);
+    var g=new THREE.Group(); g.add(m); scene.add(g); current=g;
+    var sz=new THREE.Vector3(); geo.boundingBox.getSize(sz); var r=sz.length()/2;
+    var dist=r/Math.sin(THREE.MathUtils.degToRad(cam.fov/2))*0.95;
+    cam.position.set(dist*0.7,dist*0.5,dist*0.8); cam.near=dist/100; cam.far=dist*10; cam.updateProjectionMatrix();
+    controls.target.set(0,0,0); controls.minDistance=r*1.1; controls.maxDistance=dist*3; controls.update();
+    fb.style.display='none';
+  }
+  load=function(i){
+    want=i; var p=parts[i];
+    if(cache[p.id]) return put(i,cache[p.id]);
+    fb.style.display='grid'; fb.textContent='Loading '+p.name.toLowerCase()+'…';
+    fetch('models/'+p.id+'.json').then(function(r){ if(!r.ok) throw 0; return r.json(); }).then(function(j){
+      var bin=atob(j.stl_b64), buf=new Uint8Array(bin.length); for(var k=0;k<bin.length;k++) buf[k]=bin.charCodeAt(k);
+      var geo=loader.parse(buf.buffer); geo.computeVertexNormals(); cache[p.id]=geo; put(i,geo);
+    }).catch(function(){ if(i===want) fb.textContent='Couldn’t load this part.'; });
+  };
+  (function loop(){ requestAnimationFrame(loop); controls.update(); renderer.render(scene,cam); })();
+  select(0);
+})();
+</script>
+
+</body>
+</html>
